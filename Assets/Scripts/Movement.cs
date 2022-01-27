@@ -18,7 +18,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private bool canUseBoost = true;
     private float speedBoost = 5;
     [SerializeField] private float cdBoost = 0f;
-    [SerializeField] private bool onCDBoost = false;
 
     [Header("BoostUI Picture")]
 
@@ -57,7 +56,6 @@ public class Movement : MonoBehaviour
             {
                 Boost1SecLeft();
             }
-            
         }
         else
             BoostIsReady();
@@ -67,6 +65,7 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canUseBoost)
         {
+            boostReady.color = new Color32(104, 104, 104, 100);
             canUseBoost = false;
             speed *= speedBoost;
 
@@ -78,27 +77,25 @@ public class Movement : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         speed /= speedBoost;
-        onCDBoost = true;
 
         StartCoroutine(TimerBoost());
+            
     }
 
     IEnumerator TimerBoost()
     {
-        yield return new WaitForSeconds(1f);
-
-        while(cdBoost != 3)
+        while (true)
         {
+            yield return new WaitForSeconds(1f);
             cdBoost++;
-        print("cdBoost++");
-        }
-        
+            if (cdBoost == 4)
+            {
+                canUseBoost = true;
+                cdBoost = 0f;
+                boostReady.color = new Color32(255, 255, 255, 255);
 
-        if (cdBoost == 3)
-        {
-            canUseBoost = true;
-            cdBoost = 0f;
-            onCDBoost = false;
+                break;
+            }
         }
     }
 

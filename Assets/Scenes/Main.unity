@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &554302301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -599,7 +599,6 @@ MonoBehaviour:
   speed: 300
   canUseBoost: 1
   cdBoost: 0
-  onCDBoost: 0
   boostReady: {fileID: 862209158}
   boost1Sec: {fileID: 802997227}
   boost2Sec: {fileID: 1350648035}
@@ -713,7 +712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &802997226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1229,7 +1228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1350648034
 RectTransform:
   m_ObjectHideFlags: 0
