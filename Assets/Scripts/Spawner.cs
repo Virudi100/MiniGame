@@ -7,12 +7,17 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject cube;
     [SerializeField] private float _delay = .2f;
+
+    [Header("Difficulty")]
+    [SerializeField] private float cubeMass = 10f;
     
     
 
     private void Start()
     {
         InvokeRepeating("Spawn", _delay, _delay);
+
+        StartCoroutine(DifficultyIncreaser());
     }
     
     private void Spawn()
@@ -23,6 +28,15 @@ public class Spawner : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    IEnumerator DifficultyIncreaser()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1f);
+            cubeMass += 0.1f;
+        }
     }
 }
 
