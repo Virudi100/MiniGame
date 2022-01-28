@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+
 [RequireComponent(typeof(Rigidbody))]
 
 public class Movement : MonoBehaviour
@@ -26,6 +27,8 @@ public class Movement : MonoBehaviour
     [SerializeField] RawImage boost2Sec;
     [SerializeField] RawImage boost3Sec;
 
+    
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,8 +42,9 @@ public class Movement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
+    {  //-6 , 5.8
+
+       
 
         if (cdBoost != 0)
         {
@@ -63,6 +67,8 @@ public class Movement : MonoBehaviour
 
     void GetInput()
     {
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal") * speed * Time.deltaTime, 0, 0);
+
         if (Input.GetKeyDown(KeyCode.Space) && canUseBoost)
         {
             boostReady.color = new Color32(104, 104, 104, 100);
@@ -79,15 +85,14 @@ public class Movement : MonoBehaviour
         speed /= speedBoost;
 
         StartCoroutine(TimerBoost());
-            
     }
 
     IEnumerator TimerBoost()
     {
         while (true)
         {
-            yield return new WaitForSeconds(1f);
             cdBoost++;
+            yield return new WaitForSeconds(1f);
             if (cdBoost == 4)
             {
                 canUseBoost = true;

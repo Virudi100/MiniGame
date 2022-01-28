@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
 
     [Header("Difficulty")]
     [SerializeField] private float cubeMass = 10f;
+    private GameObject newCube;
     
     
 
@@ -22,7 +23,8 @@ public class Spawner : MonoBehaviour
     
     private void Spawn()
     {
-        Instantiate(cube, new Vector3(Random.Range(-6, 6),10,0),Quaternion.identity);
+        newCube = Instantiate(cube, new Vector3(Random.Range(-6, 6),10,0),Quaternion.identity);
+        newCube.GetComponent<Rigidbody>().mass = cubeMass;
     }
 
     public void Retry()
