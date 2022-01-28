@@ -11,14 +11,14 @@ public class Movement : MonoBehaviour
 {
     [Header("Movement")]
 
-    [SerializeField] private float speed = 300f;
+    private float speed = 1200f;
     private Rigidbody rb;
 
     [Header("Boost Management")]
 
-    [SerializeField] private bool canUseBoost = true;
-    private float speedBoost = 5;
-    [SerializeField] private float cdBoost = 0f;
+    private bool canUseBoost = true;
+    private float speedBoost = 3;
+    private float cdBoost = 0f;
 
     [Header("BoostUI Picture")]
 
@@ -26,6 +26,8 @@ public class Movement : MonoBehaviour
     [SerializeField] RawImage boost1Sec;
     [SerializeField] RawImage boost2Sec;
     [SerializeField] RawImage boost3Sec;
+
+    private int i = 0;
 
     
 
@@ -42,9 +44,7 @@ public class Movement : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {  //-6 , 5.8
-
-       
+    {  
 
         if (cdBoost != 0)
         {
@@ -76,6 +76,20 @@ public class Movement : MonoBehaviour
             speed *= speedBoost;
 
             StartCoroutine(Boost());
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(i == 0)
+            {
+                Time.timeScale = 0;
+                i++;
+            }
+            else if (i == 1)
+            {
+                Time.timeScale = 1;
+                i = 0;
+            }
         }
     }
 

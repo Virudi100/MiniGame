@@ -2,25 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private GameObject cube;
-    [SerializeField] private float _delay = .2f;
+    private float _delay = .2f;
 
     [Header("Difficulty")]
-    [SerializeField] private float cubeMass = 10f;
+    private float cubeMass = 10f;
     private GameObject newCube;
-    
-    
 
+    private float timer = 0f;
+    [SerializeField] private Text timeText;
+    [SerializeField] private Text highTimeText;
+
+    [SerializeField] private Scores datas;
+    
     private void Start()
     {
         InvokeRepeating("Spawn", _delay, _delay);
 
         StartCoroutine(DifficultyIncreaser());
     }
-    
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+
+        Mathf.Floor(timer);
+
+        timeText.text = timer.ToString();
+        highTimeText.text = datas.highTime.ToString();
+
+        if (timer > datas.highTime)
+        {
+            datas.highTime = timer;
+            
+        }
+    }
+
     private void Spawn()
     {
         newCube = Instantiate(cube, new Vector3(Random.Range(-6, 6),10,0),Quaternion.identity);
@@ -30,6 +51,11 @@ public class Spawner : MonoBehaviour
     public void Retry()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     IEnumerator DifficultyIncreaser()
